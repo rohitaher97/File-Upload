@@ -65,7 +65,7 @@ app.get("/upload", async (req, res) => {
   } else {
     const username = req.session.user.username;
     const data = await File.find({ username });
-    const headers = req.headers.origin;
+    const headers = req.headers.host;
     res.render("upload", { name: username, data: data, headers: headers });
   }
 });
