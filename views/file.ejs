@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File</title>
+  </head>
+  <body>
+    <% if (locals.name != null) { %>
+    <div style="margin-bottom: 1rem">
+      <p style="color: gree"><%= locals.name %></p>
+    </div>
+    <% } %>
+    <form
+      method="POST"
+      style="
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: auto 1fr;
+        max-width: 500px;
+        margin: 0 auto;
+      "
+    >
+      <button style="grid-column: span 2" type="submit">Download</button>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Register</title>
+  </head>
+  <body>
+    <% if (locals.error != null) { %>
+    <div style="margin-bottom: 1rem">
+      <p style="color: red"><%= locals.error %></p>
+    </div>
+    <% } %>
+    <form
+      action="/register"
+      method="POST"
+      style="
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: auto 1fr;
+        max-width: 500px;
+        margin: 0 auto;
+      "
+      enctype="application/json"
+    >
+    
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required />
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required />
+      <label for="gender">Gender:</label>
+      <select id="gender" name="gender">
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+      <button style="grid-column: span 2" type="submit">Register</button>
+    </form>
+    <div
+      style="
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: auto 1fr;
+        max-width: 500px;
+        margin: 10px auto;
+      "
+    >
+      Already registered?
+      <a href="/login">Login</a>
+    </div>
+  </body>
+</html>

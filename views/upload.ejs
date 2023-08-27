@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload</title>
+  </head>
+  <body>
+    <% if (locals.name != null) { %>
+    <div style="margin-bottom: 1rem">
+      Welcome
+      <span><%= locals.name %>!</span>
+      <div>
+        <form action="/logout" method="POST" enctype="multipart/form-data">
+          <button style="grid-column: span 2" type="submit">Logout</button>
+        </form>
+      </div>
+    </div>
+    <% } %>
+    <form
+      action="/upload"
+      method="POST"
+      style="
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: auto 1fr;
+        max-width: 500px;
+        margin: 0 auto;
+      "
+      enctype="multipart/form-data"
+    >
+      <label for="file">File:</label>
+      <input type="file" id="file" name="file" required />
+      <button style="grid-column: span 2" type="submit">Share</button>
+    </form>
+
+    <% if (locals.fileLink != null) { %>
+    <div
+      style="
+        gap: 0.5rem;
+        grid-template-columns: auto 1fr;
+        max-width: 500px;
+        margin: 20px auto;
+      "
+    >
+      Your file is uploaded:
+      <a href="<%= locals.fileLink %> "><%= locals.fileLink %></a>
+    </div>
+    <% } %> <% if (locals.data != null) { %>
+    <div
+      style="
+        gap: 0.5rem;
+        grid-template-columns: auto 1fr;
+        max-width: 500px;
+        margin: 20px auto;
+      "
+    >
+      <h1>Your uploaded files</h1>
+      <div>
+        <% locals.data.forEach(function(elem) { %>
+        <div
+          style="display: grid; grid-template-columns: auto 1fr; gap: 0.9rem"
+        >
+          <p><%= elem.originalName %></p>
+          <a
+            style="padding-top: 16px"
+            href="<%= locals.headers %>/file/<%= elem.id %>"
+            >https://file-upload-qu1m.onrender.com/file/<%= elem.id %></a
+          >
+        </div>
+        <% }); %>
+      </div>
+    </div>
+    <% } %>
+  </body>
+</html>
