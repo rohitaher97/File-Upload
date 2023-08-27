@@ -129,15 +129,31 @@ app.post("/upload", upload.single("file"), async (req, res) => {
     originalName: req.file.originalname,
   };
 
-  const file = await File.create(fileData);
+  if (req.body.password != null && req.body.password !== "") {
+    fileData.password = await bcrypt.hash(req.body.password, 12);
+  }
 
-  res.render("upload", { fileLink: `${req.headers.origin}/file/${file.id}` });
+  const file = await File.create(fileData);
+  const username = req.session.user.username;
+
+  res.render("upload", {name:username, fileLink: `${req.headers.origin}/file/${file.id}` });
 });
 
 app.route("/file/:id").get(handleDownload).post(handleDownload);
 
 async function handleDownload(req, res) {
   const file = await File.findById(req.params.id);
+  if (file.password != null) {
+    if (req.body.password == null) {
+      res.render("password", { name: file.originalName });
+      return;
+    }
+
+    if (!(await bcrypt.compare(req.body.password, file.password))) {
+      res.render("password", { error: true, name: file.originalName });
+      return;
+    }
+  }
   res.download(file.path, file.originalName);
 }
 
