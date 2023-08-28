@@ -40,6 +40,7 @@ db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {});
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(__dirname + '/public'));
 
 app.set("view engine", "ejs");
 
@@ -70,6 +71,11 @@ app.get("/upload", async (req, res) => {
   }
 });
 
+app.post("/delete",async(req,res)=>{
+  console.log(req.body);
+  res.redirect("/upload")
+})
+
 app.post("/register", async (req, res) => {
   const { username, password, gender } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -93,19 +99,23 @@ app.post("/login", async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findOne({ username });
 
-  if (user && bcrypt.compare(password, user.password)) {
-    req.session.user = {
-      username,
-      isLoggedIn: true,
-    };
+  if (user) {
+    if (await bcrypt.compare(password, user.password)) {
+      req.session.user = {
+        username,
+        isLoggedIn: true,
+      };
 
-    try {
-      req.session.save();
-    } catch (err) {
-      console.error("Error saving to session storage: ", err);
-      return next(new Error("Error creating user"));
+      try {
+        req.session.save();
+      } catch (err) {
+        console.error("Error saving to session storage: ", err);
+        return next(new Error("Error creating user"));
+      }
+      res.redirect("/upload");
+    } else {
+      res.render("login", { error: "Incorrect password" });
     }
-    res.redirect("/upload");
   } else {
     res.render("login", { error: "User not registered" });
   }

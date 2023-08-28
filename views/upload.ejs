@@ -3,9 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/navbar.css">
+
     <title>Upload</title>
   </head>
-  <body>
+  <body> 
+    <nav>
+      <h1> File Upload</h1></nav>
+    <div class="container">
     <% if (locals.name != null) { %>
     <div style="margin-bottom: 1rem">
       Welcome
@@ -17,6 +22,8 @@
       </div>
     </div>
     <% } %>
+    <h1 style="text-align: center;margin-bottom: 10px;">Upload File</h1>
+
     <form
       action="/upload"
       method="POST"
@@ -63,16 +70,20 @@
         <div
           style="display: grid; grid-template-columns: auto 1fr; gap: 0.9rem"
         >
-          <p><%= elem.originalName %></p>
-          <a
+        <form action="/delete" method="POST" enctype="application/json">
+          <p id="name"><%= elem.originalName %></p>
+          <a id="ID"
             style="padding-top: 16px"
             href="/file/<%= elem.id %>"
             ><%= locals.headers %>/file/<%= elem.id %></a
           >
+            <!-- <button type="submit">Delete</button> -->
+          </form>
         </div>
         <% }); %>
       </div>
     </div>
     <% } %>
+  </div>
   </body>
 </html>

@@ -3,16 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+    <link rel="stylesheet" href="/css/navbar.css">
+
     <title>Login</title>
   </head>
   <body>
-    
+    <nav>
+      <h1> File Upload</h1></nav>
+      <div class="container">
     <% if (locals.error != null) { %>
     <div style="margin-bottom: 1rem">
       <p style="color: red"><%= locals.error %></p>
     </div>
     <% } %>
+    <h1 style="text-align: center;margin-bottom: 10px;">Login </h1>
+
     <form
       action="/login"
       method="POST"
@@ -26,9 +31,9 @@
       enctype="application/json"
     >
       <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required />
+      <input type="email" placeholder="Enter your Username" id="username" name="username" required />
       <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required />
+      <input type="password" placeholder="Enter Password" id="password" name="password" required />
       <button style="grid-column: span 2" type="submit">Login</button>
     </form>
     <div
@@ -41,7 +46,8 @@
       "
     >
       New user?
-      <a href="/">Register</a>
+      <a style="color: yellow;" href="/">Register</a>
     </div>
+  </div>
   </body>
 </html>
