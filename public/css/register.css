@@ -1,0 +1,71 @@
+/* style.css */
+
+/* Navbar */
+.nav-title {
+    text-align: center;
+    margin: 1rem 0;
+    font-size: 1.5rem;
+  }
+  
+  /* Error Message */
+  .error-message {
+    margin-bottom: 1rem;
+    color: red;
+  }
+  
+  /* Register Form */
+  .register-title {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .regform {
+    display: grid;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .regform label {
+    font-weight: bold;
+  }
+  
+  .regform input,
+  .regform select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .register-button {
+    grid-column: span 2;
+    background-color: #007bff;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Login Link */
+  .login-link {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: auto 1fr;
+    max-width: 500px;
+    margin: 10px auto;
+  }
+  
+  .login-link a {
+    text-decoration: none;
+    color: rgb(247, 34, 34);
+  }
+  
+  /* Responsive Styles */
+  @media only screen and (max-width: 600px) {
+    .regform {
+      max-width: 100%;
+    }
+  }
+  

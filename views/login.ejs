@@ -1,53 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/navbar.css">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/login.css"> <!-- Link to the enhanced CSS file -->
 
-    <title>Login</title>
-  </head>
-  <body>
-    <nav>
-      <h1> File Upload</h1></nav>
-      <div class="container">
+  <title>Login</title>
+</head>
+<body>
+  <nav>
+    <h1 class="nav-title">File Upload</h1>
+  </nav>
+  <div class="container">
     <% if (locals.error != null) { %>
-    <div style="margin-bottom: 1rem">
-      <p style="color: red"><%= locals.error %></p>
+    <div class="error-message">
+      <p><%= locals.error %></p>
     </div>
     <% } %>
-    <h1 style="text-align: center;margin-bottom: 10px;">Login </h1>
-
-    <form
-      action="/login"
-      method="POST"
-      style="
-        display: grid;
-        gap: 0.5rem;
-        grid-template-columns: auto 1fr;
-        max-width: 500px;
-        margin: 0 auto;
-      "
-      enctype="application/json"
-    >
-      <label for="username">Username:</label>
-      <input type="email" placeholder="Enter your Username" id="username" name="username" required />
-      <label for="password">Password:</label>
-      <input type="password" placeholder="Enter Password" id="password" name="password" required />
-      <button style="grid-column: span 2" type="submit">Login</button>
-    </form>
-    <div
-      style="
-        display: grid;
-        gap: 0.5rem;
-        grid-template-columns: auto 1fr;
-        max-width: 500px;
-        margin: 10px auto;
-      "
-    >
-      New user?
-      <a style="color: yellow;" href="/">Register</a>
+    <div class="login-form-container">
+      <h1 class="login-title">Login</h1>
+      <form action="/login" method="POST" class="login-form" enctype="application/json">
+        <label for="username">Username:</label>
+        <input type="email" placeholder="Enter your Username" id="username" name="username" required>
+        <label for="password">Password:</label>
+        <input type="password" placeholder="Enter Password" id="password" name="password" required>
+        <button class="login-button" type="submit">Login</button>
+      </form>
+      <div class="register-link">
+        New user? <a href="/" class="register-link">Register</a>
+      </div>
     </div>
   </div>
-  </body>
+</body>
 </html>

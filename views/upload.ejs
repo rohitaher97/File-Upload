@@ -1,83 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/navbar.css">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/navbar.css">
+  <link rel="stylesheet" href="/css/upload.css"> <!-- Link to the enhanced CSS file -->
 
-    <title>Upload</title>
-  </head>
-  <body> 
-    <nav>
-      <h1> File Upload</h1></nav>
-    <div class="container">
+  <title>Upload</title>
+</head>
+<body>
+  <nav>
+    <h1 class="nav-title">File Upload</h1>
+  </nav>
+  <div class="container">
     <% if (locals.name != null) { %>
-    <div style="margin-bottom: 1rem">
-      Welcome
-      <span><%= locals.name %>!</span>
-      <div>
-        <form action="/logout" method="POST" enctype="multipart/form-data">
-          <button style="grid-column: span 2" type="submit">Logout</button>
-        </form>
-      </div>
+    <div class="welcome-message">
+      Welcome <span><%= locals.name %>!</span>
+      <form action="/logout" method="POST" class="logout-form" enctype="multipart/form-data">
+        <button class="logout-button" type="submit">Logout</button>
+      </form>
     </div>
     <% } %>
-    <h1 style="text-align: center;margin-bottom: 10px;">Upload File</h1>
-
+    <h1 class="upload-title">Upload File</h1>
     <form
       action="/upload"
       method="POST"
-      style="
-        display: grid;
-        gap: 0.5rem;
-        grid-template-columns: auto 1fr;
-        max-width: 500px;
-        margin: 0 auto;
-      "
+      class="upload-form"
       enctype="multipart/form-data"
     >
       <label for="file">File:</label>
-      <input type="file" id="file" name="file" required />
+      <input type="file" id="file" name="file" required>
       <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required />
-      <button style="grid-column: span 2" type="submit">Share</button>
+      <input type="password" id="password" name="password" required>
+      <button class="share-button" type="submit">Share</button>
     </form>
-
     <% if (locals.fileLink != null) { %>
-    <div
-      style="
-        gap: 0.5rem;
-        grid-template-columns: auto 1fr;
-        max-width: 500px;
-        margin: 20px auto;
-      "
-    >
-      Your file is uploaded:
-      <a href="<%= locals.fileLink %> "><%= locals.fileLink %></a>
+    <div class="file-link">
+      Your file is uploaded: <a href="<%= locals.fileLink %> "><%= locals.fileLink %></a>
     </div>
     <% } %> <% if (locals.data != null) { %>
-    <div
-      style="
-        gap: 0.5rem;
-        grid-template-columns: auto 1fr;
-        max-width: 500px;
-        margin: 20px auto;
-      "
-    >
+    <div class="uploaded-files">
       <h1>Your uploaded files</h1>
-      <div>
+      <div class="file-list">
         <% locals.data.forEach(function(elem) { %>
-        <div
-          style="display: grid; grid-template-columns: auto 1fr; gap: 0.9rem"
-        >
-        <form action="/delete" method="POST" enctype="application/json">
-          <p id="name"><%= elem.originalName %></p>
-          <a id="ID"
-            style="padding-top: 16px"
-            href="/file/<%= elem.id %>"
-            ><%= locals.headers %>/file/<%= elem.id %></a
-          >
-            <!-- <button type="submit">Delete</button> -->
+        <div class="file-item">
+          <form action="/delete" method="POST" class="delete-form" enctype="application/json">
+            <p class="file-name"><%= elem.originalName %></p>
+            <a class="file-id" href="/file/<%= elem.id %>"><%= locals.headers %>/file/<%= elem.id %></a>
+            <!-- <button class="delete-button" type="submit">Delete</button> -->
           </form>
         </div>
         <% }); %>
@@ -85,5 +55,5 @@
     </div>
     <% } %>
   </div>
-  </body>
+</body>
 </html>
